@@ -1,0 +1,17 @@
+{
+    "short_name": "Projeto 10",
+    "name": "Projeto Level 10",
+    "icons": [
+        {
+            "src": "./app/images/blueprint.png",
+            "type": "image/png",
+            "sizes": "512x512"
+        }
+    ],
+    "description": "Projeto formulário, API, RegExp, localStorage, import & export, Bootstrap",
+    "start_url": "./index.html",
+    "background_color": "#222222",
+    "display": "standalone",
+    "scope": "./",
+    "theme_color": "#222222"
+}

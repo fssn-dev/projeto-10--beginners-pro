@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Offline</title>
+    <!-- CSS inline -->
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 2em;
+        }
+
+        h1 {
+            color: #222;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Você está offline</h1>
+    <p>Clique no botão para recarregar a página</p>
+    <button type="button">Recarregar</button>
+    <!-- JavaScript inline -->
+    <script>
+        // Reload manual
+        document.querySelector("button").addEventListener("click", () => {
+            window.location.reload();
+        });
+        //Ouve as mudanças no estado da rede, recarrega a página quando estiver online.
+        // Isso trata do caso em que o dispositivo está completamente offline.
+        window.addEventListener('online', () => {
+            window.location.reload();
+        });
+        // Verifica se o servidor está respondendo e recarrega a página se estiver.
+        // Isso trata do caso quando o dispositivo está online, mas o servidor
+        // está offline ou se comportando mal.
+        async function checarConexaoERecarregar() {
+            try {
+                const response = await fetch('.');
+                // Verifica se recebemos uma resposta válida do servidor
+                if (response.status >= 200 && response.status < 500) {
+                    window.location.reload();
+                    return;
+                }
+            } catch {
+                // Não foi possível conectar ao servidor, ignore
+            }
+            window.setTimeout(checarConexaoERecarregar, 2500);
+        }
+        checarConexaoERecarregar();
+    </script>
+</body>
+
+</html>
